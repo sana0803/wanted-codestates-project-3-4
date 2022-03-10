@@ -1,32 +1,47 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { BsUpload } from 'react-icons/bs';
 import { FiHeart } from 'react-icons/fi';
+import { FaHeart } from 'react-icons/fa';
 import PropTypes from 'prop-types';
+import { useParams } from 'react-router-dom';
 
-const TitleContainer = ({ title }) => {
+const TitleContainer = ({ title, link }) => {
+  const { type } = useParams();
+  const [heart, setHeart] = useState(false);
+  const clickHeartBtn = () => setHeart(!heart);
   return (
     <MainContainer>
       <Title>{title}</Title>
       <ButtonContainer>
-        <IconBtn>
-          <FiHeart size="32" />
+        <IconBtn onClick={clickHeartBtn}>
+          {heart ? <FaHeart size="32" color="red" /> : <FiHeart size="32" />}
         </IconBtn>
-        <IconBtn>
+        <IconHref
+          href={
+            type === 'youtube'
+              ? 'https://www.youtube.com/watch?v=' + link
+              : link
+          }
+        >
           <BsUpload size="32" />
-        </IconBtn>
+        </IconHref>
       </ButtonContainer>
     </MainContainer>
   );
 };
 
 const MainContainer = styled.div`
+  padding: 15px;
   display: flex;
   width: 720px;
+  box-sizing: border-box;
   justify-content: space-between;
 `;
 
-const ButtonContainer = styled.div``;
+const ButtonContainer = styled.div`
+  appearance: none;
+`;
 
 const Title = styled.div`
   font-weight: bold;
@@ -34,12 +49,22 @@ const Title = styled.div`
 `;
 
 const IconBtn = styled.button`
-  border: none;
+  border: 0;
+  outline: 0;
   background-color: white;
+  cursor: pointer;
+`;
+
+const IconHref = styled.a`
+  background-color: white;
+  text-decoration: none;
+  color: black;
+  margin: 10px;
 `;
 
 TitleContainer.propTypes = {
   title: PropTypes.string,
+  link: PropTypes.string,
 };
 
 export default TitleContainer;
