@@ -1,10 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
+import MainTop from '../components/mainTop/MainTop';
 
 const Main = () => {
   const { type } = useParams();
-  return <MainContainer></MainContainer>;
+  return (
+    <MainContainer>
+      <MainTop />
+    </MainContainer>
+  );
 };
 
 const MainContainer = styled.div`
