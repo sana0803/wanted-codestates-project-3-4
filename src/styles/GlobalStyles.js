@@ -5,6 +5,10 @@ const GlobalStyles = createGlobalStyle`
     //style reset
     ${reset}
 
+    body {
+        letter-spacing: -0.02em;
+    }
+
     :root {
         --main-color: #1276F0;
         --blue: #659DF9;

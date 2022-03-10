@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import logo from '../../src/logo.svg';
 // import { useSelector } from 'react-redux';
 
 const tabMenu = [
@@ -17,18 +18,22 @@ const Header = () => {
 
   return (
     <HeaderWrap>
+      <img src={logo} />
       <TabContainer>
         {tabMenu.map((item, idx) => (
           // currentIdx={currentIdx}
-          <TabItem
+          <li
+            className={currentIdx === idx ? 'active' : ''}
             key={idx}
             currentIdx={currentIdx}
             onClick={() => navigate('/:type')}
           >
             {item.sector}
-          </TabItem>
+          </li>
         ))}
+        <BottomBar />
       </TabContainer>
+      <SubscribeBtn>구독하기</SubscribeBtn>
     </HeaderWrap>
   );
 };
@@ -41,19 +46,52 @@ const HeaderWrap = styled.header`
   justify-content: center;
 `;
 
-const TabContainer = styled.div`
-  width: 720px;
+const TabContainer = styled.ul`
+  max-width: 720px;
   height: 100%;
-  background-color: green;
+  /* background-color: green; */
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+
+  li {
+    transition: all 0.3s ease-in-out;
+    /* background-color: var(--light-gray); */
+    width: 8rem;
+    height: 100%;
+    line-height: 60px;
+    text-align: center;
+    font-size: 18px;
+    cursor: pointer;
+    color: var(--gray);
+    font-weight: 600;
+
+    :hover {
+      background-color: var(--light-gray);
+    }
+  }
+  .active {
+    color: #222;
+  }
 `;
 
-const TabItem = styled.div`
+const BottomBar = styled.div`
+  width: 8rem;
+  height: 4px;
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  background-color: var(--main-color);
+  transition: all 0.3s ease-in-out;
+  transform: translateX(8rem);
+`;
+
+const SubscribeBtn = styled.div`
+  width: 7rem;
+  height: 32px;
   background-color: var(--blue);
-  font-size: 18px;
-  cursor: pointer;
 `;
 
 export default Header;
