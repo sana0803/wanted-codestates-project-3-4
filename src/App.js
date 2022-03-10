@@ -8,6 +8,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <Header />
+      <Main />
       <Routes>
         <Route path="/:type" element={<Main />} />
         <Route path="/:type/:id" element={<Detail />} />
