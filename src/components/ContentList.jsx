@@ -1,30 +1,54 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import data from './data.json';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const ContentList = () => {
-  console.log(data.content);
+  const { type } = useParams();
+  const navigate = useNavigate();
+
+  const [matchData, setMatchData] = useState();
+
   const dataList = data.content;
-  // const news = dataList.filter(value => value.sector_id === 1);
-  const youtube = dataList.filter(value => value.sector_id === 2);
-  // const report = dataList.filter(value => value.sector_id === 3);
-  // Link = https://www.youtube.com/watch?v=fNEdetWtoJg
+  const filterData = id => dataList.filter(value => value.sector_id === id);
+
+  useEffect(() => {
+    if (type === 'news') {
+      setMatchData(filterData(1));
+    } else if (type === 'youtube') {
+      setMatchData(filterData(2));
+    } else if (type === 'report') {
+      setMatchData(filterData(3));
+    }
+  }, [type]);
 
   return (
-    <ul>
-      {youtube.map((value, index) => (
-        <li key={index}>
-          {/* <img src={value.image} alt={value.title} /> */}
-          <iframe
-            width="560"
-            height="315"
-            src={`https://www.youtube.com/embed/${value.link}`}
-            frameBorder="0"
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
-        </li>
-      ))}
-    </ul>
+    <>
+      <button onClick={() => navigate('/youtube')}>유튜브</button>
+      <button onClick={() => navigate('/news')}>뉴스</button>
+      <button onClick={() => navigate('/report')}>인사이트</button>
+      <ul>
+        {matchData &&
+          matchData.map((value, index) => {
+            if (index < 4) {
+              return (
+                <li key={index}>
+                  <img src={value.image} alt={value.title} />
+                  <p>
+                    {value.upload_date} <span>7</span>
+                    <a
+                      href={`https://www.youtube.com/watch?v=${value.link}`}
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      공유하기
+                    </a>
+                  </p>
+                </li>
+              );
+            }
+          })}
+      </ul>
+    </>
   );
 };
 
