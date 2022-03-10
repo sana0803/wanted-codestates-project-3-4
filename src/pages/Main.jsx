@@ -1,7 +1,12 @@
 import React from 'react';
+import ContentList from '../components/ContentList';
 
 const Main = () => {
-  return <div></div>;
+  return (
+    <div>
+      <ContentList />
+    </div>
+  );
 };
 
 export default Main;
