@@ -27,7 +27,11 @@ const Youtube = () => {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         ></iframe>
       </CustomIframe>
-      <TitleContainer title={DUMMY_DATA.title} link={DUMMY_DATA.link} />
+      <TitleContainer
+        id={DUMMY_DATA.id}
+        title={DUMMY_DATA.title}
+        link={DUMMY_DATA.link}
+      />
       <Body>{DUMMY_DATA.body}</Body>
     </YoutubeContainer>
   );

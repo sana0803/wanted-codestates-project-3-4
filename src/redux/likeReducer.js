@@ -1,18 +1,15 @@
-import { CLICK_LIKE, REMOVE_LIKE } from './actions';
+import { CLICK_LIKE } from './actions';
 
-// [{id: 12, like: false}]
-const initialState = [];
+// {3: false, 4:true}
+const initialState = {};
 export const clickLike = (previousState = initialState, action) => {
   if (action.type === CLICK_LIKE) {
-    return [...previousState, { id: action.id, like: true }];
-  }
-
-  if (action.type === REMOVE_LIKE) {
-    return previousState.map(item => {
-      if (action.id === item.id) {
-        return { ...item, like: false };
-      }
-      return item;
-    });
+    const selectId = action.id;
+    if (previousState[selectId]) {
+      previousState[selectId] = false;
+      return previousState;
+    }
+    previousState[selectId] = true;
+    return previousState;
   }
 };

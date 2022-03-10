@@ -5,11 +5,22 @@ import { FiHeart } from 'react-icons/fi';
 import { FaHeart } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
+import { clickLike } from '../../redux/actions';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-const TitleContainer = ({ title, link }) => {
+const TitleContainer = ({ id, title, link }) => {
   const { type } = useParams();
+  const dispatch = useDispatch();
   const [heart, setHeart] = useState(false);
-  const clickHeartBtn = () => setHeart(!heart);
+
+  const like = useSelector(state => state);
+
+  const clickHeartBtn = () => {
+    dispatch(clickLike(id));
+    setHeart(like[id]);
+  };
+
   return (
     <MainContainer>
       <Title>{title}</Title>
@@ -63,6 +74,7 @@ const IconHref = styled.a`
 `;
 
 TitleContainer.propTypes = {
+  id: PropTypes.number,
   title: PropTypes.string,
   link: PropTypes.string,
 };
