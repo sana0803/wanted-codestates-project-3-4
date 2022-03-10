@@ -33,6 +33,7 @@ const Report = () => {
 
 const ReportContainer = styled.div`
   width: 720px;
+  margin: 0 auto;
 `;
 
 const ImageContainer = styled.div`
