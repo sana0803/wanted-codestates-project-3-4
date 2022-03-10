@@ -12,6 +12,6 @@ const Detail = () => {
       <News />
     </div>
   );
-
+};
 
 export default Detail;
