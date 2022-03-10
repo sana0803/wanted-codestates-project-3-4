@@ -20,8 +20,7 @@ const App = () => {
     fetchData();
   }, []);
 
-  console.log(contentData);
-  console.log(contentSector);
+  console.log(contentData, contentSector);
 
   return (
     <BrowserRouter>
