@@ -1,15 +1,13 @@
 import React from 'react';
 import Youtube from '../components/detail/Youtube';
 import Report from '../components/detail/Report';
-import News from '../components/detail/News';
-
+import { useParams } from 'react-router-dom';
 const Detail = () => {
+  let params = useParams();
   return (
     <div>
-      상세페이지
-      <Youtube />
-      <Report />
-      <News />
+      {params.type === 'youtube' ? <Youtube /> : <></>}
+      {params.type === 'report' ? <Report /> : <></>}
     </div>
   );
 };
