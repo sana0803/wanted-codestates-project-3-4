@@ -10,7 +10,7 @@ const tabMenu = [
   { sector: '인사이트', content: 'report' },
 ];
 
-const Header = contentSector => {
+const Header = () => {
   // console.log(contentSector);
   const navigate = useNavigate();
   const barRef = useRef(null);
@@ -45,7 +45,7 @@ const Header = contentSector => {
       <SubscribeWrap>
         <span>샌드뱅크 오리지널</span>
         <SubscribeBtn>
-          <a href="https://sandbank.io " target="_blank">
+          <a href="https://sandbank.io " target="_blank" rel="noreferrer">
             구독하기
           </a>
         </SubscribeBtn>
