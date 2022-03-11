@@ -9,15 +9,14 @@ const BannerContainer = styled.div`
 `;
 
 const Banner2 = styled.span`
-  background-color: #1276f0;
   background-color: ${props =>
     props.type === 'youtube' ? '#D80404' : null}; // youtube일 때 색깔
   background-color: ${props =>
     props.type === 'news' ? '#659DF9' : null}; // news일 때 색깔
   background-color: ${props =>
-    props.type === 'report' ? '#7F73B0' : null}; // Report일 때 색깔
-
-  // 6AE0AA
+    props.type === 'report' ? '#B72CA0' : null}; // Report일 때 색깔
+  background-color: ${props =>
+    props.text === '새로 올라왔어요' ? '#1276f0' : null};
   color: white;
   font-size: 15px;
   padding: 3px 5px;
@@ -35,7 +34,10 @@ const BannerMessage = ({ text }) => {
   return (
     <div>
       <BannerContainer>
-        <div>{text}</div> <Banner2 type={type}>{type}</Banner2>
+        <div>{text}</div>
+        <Banner2 type={type} text={text}>
+          {text === '새로 올라왔어요' ? 'new' : type}
+        </Banner2>
       </BannerContainer>
     </div>
   );
