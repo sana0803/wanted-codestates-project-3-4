@@ -24,20 +24,20 @@ const Button = styled.button`
   }
 `;
 
-const AddButton = ({ addData, setAddData }) => {
+const AddButton = ({ isAdd, setIsAdd }) => {
   const handleAddContent = () => {
-    setAddData(!addData);
+    setIsAdd(!isAdd);
   };
   return (
     <>
-      <Button onClick={handleAddContent}>{addData ? '접기' : '더보기'}</Button>
+      <Button onClick={handleAddContent}>{isAdd ? '접기' : '더보기'}</Button>
     </>
   );
 };
 
 AddButton.propTypes = {
-  setAddData: PropTypes.func,
-  addData: PropTypes.bool,
+  setIsAdd: PropTypes.func,
+  isAdd: PropTypes.bool,
 };
 
 export default AddButton;
