@@ -27,7 +27,10 @@ const Header = () => {
             className={currentIdx === idx ? 'active' : ''}
             key={idx}
             currentIdx={currentIdx}
-            onClick={() => navigate(`/${item.content}`)}
+            onClick={() => {
+              setCurrentIdx(2);
+              navigate(`/${item.content}`);
+            }}
           >
             {item.sector}
           </li>
