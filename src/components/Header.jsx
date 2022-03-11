@@ -62,7 +62,8 @@ const HeaderWrap = styled.header`
   justify-content: space-around;
   align-items: center;
   position: fixed;
-  margin-bottom: 60px;
+  z-index: 10;
+  border-bottom: 1px solid #ddd;
   img {
     width: 10rem;
     cursor: pointer;
