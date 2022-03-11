@@ -7,17 +7,28 @@ import MainTop from '../components/mainTop/MainTop';
 const Main = () => {
   const { type } = useParams();
   return (
-    <MainContainer>
-      <MainTop />
-      <ContentList type={type} />
-    </MainContainer>
+    <MainWrap>
+      <MainContainer>
+        <MainTop />
+        <ContentList type={type} />
+      </MainContainer>
+    </MainWrap>
   );
 };
 
-const MainContainer = styled.div`
+const MainWrap = styled.div`
   background-color: #f7f6fb;
   width: 100%;
   height: 100%;
   padding-top: 60px;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+`;
+
+const MainContainer = styled.div`
+  width: 720px;
+  background-color: #fff;
 `;
 export default Main;

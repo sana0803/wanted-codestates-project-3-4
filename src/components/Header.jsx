@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../src/logo.svg';
@@ -10,37 +10,44 @@ const tabMenu = [
   { sector: '인사이트', content: 'report' },
 ];
 
-const Header = () => {
+const Header = contentSector => {
+  // console.log(contentSector);
   const navigate = useNavigate();
+  const barRef = useRef(null);
   // 나중에 redux에서 받아올거
   const [currentIdx, setCurrentIdx] = useState(0);
 
   // const currentIdx = useState(state => )
+
+  const moveBar = id => {
+    barRef.current.style.transform = `translateX(${id}00%)`;
+  };
 
   return (
     <HeaderWrap>
       <img src={logo} />
       <TabContainer onClick={() => setCurrentIdx()}>
         {tabMenu.map((item, idx) => (
-          // currentIdx={currentIdx}
           <li
             className={currentIdx === idx ? 'active' : ''}
             key={idx}
-            currentIdx={currentIdx}
             onClick={() => {
-              setCurrentIdx(2);
               navigate(`/${item.content}`);
+              setCurrentIdx(idx);
+              moveBar(idx);
             }}
           >
             {item.sector}
           </li>
         ))}
-        <BottomBar />
+        <BottomBar ref={barRef} />
       </TabContainer>
       <SubscribeWrap>
         <span>샌드뱅크 오리지널</span>
         <SubscribeBtn>
-          <span>구독하기</span>
+          <a href="https://sandbank.io " target="_blank">
+            구독하기
+          </a>
         </SubscribeBtn>
       </SubscribeWrap>
     </HeaderWrap>
@@ -55,11 +62,12 @@ const HeaderWrap = styled.header`
   justify-content: space-around;
   align-items: center;
   position: fixed;
-  margin-bottom: 60px;
+  z-index: 10;
+  border-bottom: 1px solid #ddd;
+  box-sizing: border-box;
   img {
     width: 10rem;
     cursor: pointer;
-    /* background-color: yellow; */
   }
 `;
 
@@ -120,12 +128,15 @@ const SubscribeBtn = styled.div`
   height: 32px;
   background-color: var(--blue);
   border-radius: 10px;
-  color: #fff;
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+
+  a {
+    color: #fff;
+  }
 
   &:hover {
     transition: all 0.3s ease-in-out;
