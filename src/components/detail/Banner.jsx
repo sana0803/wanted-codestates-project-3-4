@@ -3,14 +3,23 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 const Banner = ({ title = '제목' }) => {
+  const clickBack = () => {
+    history.back();
+  };
   return (
     <BannerContainer>
-      <IoIosArrowBack size="36" />
+      <BackContainer onClick={clickBack}>
+        <IoIosArrowBack size="36" />
+      </BackContainer>
       <Title>{title}</Title>
       <div></div>
     </BannerContainer>
   );
 };
+
+const BackContainer = styled.div`
+  cursor: pointer;
+`;
 
 const BannerContainer = styled.div`
   display: flex;
