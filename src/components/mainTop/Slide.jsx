@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 // import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -6,21 +6,22 @@ import { BsUpload } from 'react-icons/bs';
 import { FiHeart } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { clickLike } from '../../redux/actions';
+
 const Slide = ({ img, title, id, type }) => {
-  // console.log(img);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const state = useSelector(state => state);
-  // console.log(state);
 
   let data = [];
 
-  useEffect(() => {
-    data = state;
-    console.log(data);
-  }, []);
+  data = state?.dataReducer.data.content;
+  data = data?.filter(obj => obj.id === id);
+
   return (
     <div>
-      <img
+      <ImgContainer
         width="720px"
         height="360px"
         src={
@@ -37,11 +38,26 @@ const Slide = ({ img, title, id, type }) => {
         <MainContainer>
           <Title>{title}</Title>
           <ButtonContainer>
-            <IconBtn>
-              <FiHeart size="32" />
+            <IconBtn clicked={+data[0]?.isClick}>
+              <FiHeart
+                size="32"
+                onClick={() => {
+                  dispatch(clickLike(id));
+                }}
+              />
+              {data[0].like_cnt}
             </IconBtn>
             <IconBtn>
-              <BsUpload size="32" />
+              <BsUpload
+                size="32"
+                onClick={() => {
+                  type === 'youtube'
+                    ? window.open(
+                        `https://www.youtube.com/watch?v=${data[0].link}`,
+                      )
+                    : window.open(data[0].link);
+                }}
+              />
             </IconBtn>
           </ButtonContainer>
         </MainContainer>
@@ -49,6 +65,10 @@ const Slide = ({ img, title, id, type }) => {
     </div>
   );
 };
+
+const ImgContainer = styled.img`
+  cursor: pointer;
+`;
 
 const YoutubeContainer = styled.div`
   width: 720px;
@@ -71,9 +91,10 @@ const Title = styled.div`
 `;
 const IconBtn = styled.button`
   border: none;
-  color: silver;
+  color: ${props => (props.clicked === 1 ? 'red' : 'silver')};
   background-color: white;
   padding: 10px;
+  cursor: pointer;
 `;
 
 Slide.propTypes = {
