@@ -29,7 +29,7 @@ const Slider = () => {
   useEffect(() => {
     setTimeout(nextSlide, 5000);
     clearTimeout();
-  }, []);
+  }, [currentSlide]);
   let filteredData = [];
   if (state) {
     filteredData = state.filter(obj => obj.like_top === 1);
