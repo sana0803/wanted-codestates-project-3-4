@@ -7,17 +7,17 @@ import Header from './components/Header';
 const App = () => {
   // const dispatch = useDispatch();
   // const data = useSelector(state => state);
-
   // useEffect(() => {
   //   dispatch(getContentData());
   // }, []);
   // console.log(data);
+  // console.log(contentData, contentSector);
 
   return (
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route path="/" element={<Navigate replace to="/youtube" />} />
+        <Route path="/" element={<Navigate replace to="/news" />} />
         <Route path="/:type" element={<Main />} />
         <Route path="/:type/:id" element={<Detail />} />
       </Routes>
