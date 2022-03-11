@@ -43,7 +43,7 @@ const ImageContainer = styled.div`
 `;
 
 const Body = styled.div`
-  padding: 10px 0px;
+  padding: 15px;
   font-size: 16px;
   white-space: pre-wrap;
 `;
