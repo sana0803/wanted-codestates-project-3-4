@@ -10,7 +10,6 @@ const ContentList = () => {
 
   const [matchData, setMatchData] = useState();
   const [addData, setAddData] = useState(false);
-  const [liked, setLiked] = useState(false);
 
   const dataList = data.content;
   const filterData = id => dataList.filter(value => value.sector_id === id);
@@ -32,14 +31,10 @@ const ContentList = () => {
       <button onClick={() => navigate('/news')}>뉴스</button>
       <button onClick={() => navigate('/report')}>인사이트</button>
       <ul>
-        {matchData && (
-          <Card
-            matchData={matchData}
-            addData={addData}
-            liked={liked}
-            setLiked={setLiked}
-          />
-        )}
+        {matchData.map((item, index) => {
+          <Card key={index} item={item} />;
+        })}
+        {/* {matchData && <Card matchData={matchData} addData={addData} />} */}
         <AddButton addData={addData} setAddData={setAddData} />
       </ul>
     </>
