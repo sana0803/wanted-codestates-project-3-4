@@ -10,9 +10,9 @@ const BannerContainer = styled.div`
 
 const Banner2 = styled.span`
   background-color: ${props =>
-    props.type === 'youtube' ? '#FF0000' : null}; // youtube일 때 색깔
+    props.type === 'youtube' ? '#D80404' : null}; // youtube일 때 색깔
   background-color: ${props =>
-    props.type === 'news' ? 'blue' : null}; // news일 때 색깔
+    props.type === 'news' ? '#659DF9' : null}; // news일 때 색깔
   background-color: ${props =>
     props.type === 'report' ? '#B72CA0' : null}; // Report일 때 색깔
   background-color: ${props =>
@@ -30,13 +30,13 @@ const Banner2 = styled.span`
 
 const BannerMessage = ({ text }) => {
   const { type } = useParams();
-  let capitalizedType = type[0].toUpperCase() + type.slice(1);
+  // let capitalizedType = type[0].toUpperCase() + type.slice(1);
   return (
     <div>
       <BannerContainer>
         <div>{text}</div>{' '}
         <Banner2 type={type} text={text}>
-          {text === '새로 올라왔어요' ? 'new' : capitalizedType}
+          {text === '새로 올라왔어요' ? 'new' : type}
         </Banner2>
       </BannerContainer>
     </div>

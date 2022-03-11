@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 // import Slide from './Slide';
-import BannerMessage from '../BannerMessage';
+// import BannerMessage from '../BannerMessage';
 
 const TotalSlides = 3;
 function Slider() {
@@ -33,7 +33,7 @@ function Slider() {
   return (
     <div>
       <Container>
-        <BannerMessage text="새로 올라왔어요" />
+        {/* <BannerMessage text="새로 올라왔어요" /> */}
         <SliderConatiner ref={slideRef}>
           <div>
             <img
