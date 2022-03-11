@@ -8,7 +8,7 @@ const ContentList = () => {
   const { type } = useParams();
   const navigate = useNavigate();
 
-  const [matchData, setMatchData] = useState();
+  const [matchData, setMatchData] = useState([]);
   const [addData, setAddData] = useState(false);
 
   const dataList = data.content;
@@ -32,9 +32,12 @@ const ContentList = () => {
       <button onClick={() => navigate('/report')}>인사이트</button>
       <ul>
         {matchData.map((item, index) => {
-          <Card key={index} item={item} />;
+          if (addData ? index : index < 4) {
+            return (
+              <Card key={index} index={index} item={item} addData={addData} />
+            );
+          }
         })}
-        {/* {matchData && <Card matchData={matchData} addData={addData} />} */}
         <AddButton addData={addData} setAddData={setAddData} />
       </ul>
     </>
