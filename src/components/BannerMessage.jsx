@@ -11,11 +11,11 @@ const BannerContainer = styled.div`
 const Banner2 = styled.span`
   background-color: #1276f0;
   background-color: ${props =>
-    props.type === 'youtube' ? '#FF0000' : null}; // youtube일 때 색깔
+    props.type === 'youtube' ? '#D80404' : null}; // youtube일 때 색깔
   background-color: ${props =>
-    props.type === 'news' ? 'blue' : null}; // news일 때 색깔
+    props.type === 'news' ? '#659DF9' : null}; // news일 때 색깔
   background-color: ${props =>
-    props.type === 'report' ? '#B72CA0' : null}; // Report일 때 색깔
+    props.type === 'report' ? '#7F73B0' : null}; // Report일 때 색깔
 
   // 6AE0AA
   color: white;
@@ -31,12 +31,12 @@ const Banner2 = styled.span`
 
 const BannerMessage = ({ text }) => {
   const { type } = useParams();
-  let capitalizedType = type[0].toUpperCase() + type.slice(1);
-  console.log(capitalizedType);
+  // let capitalizedType = type[0].toUpperCase() + type.slice(1);
+  // console.log(capitalizedType);
   return (
     <div>
       <BannerContainer>
-        <div>{text}</div> <Banner2 type={type}>{capitalizedType}</Banner2>
+        {/* <div>{text}</div> <Banner2 type={type}>{capitalizedType}</Banner2> */}
       </BannerContainer>
     </div>
   );
