@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import TitleContainer from './TitleContainer';
 import Banner from './Banner';
@@ -11,9 +11,6 @@ const Youtube = () => {
   const filterData = useSelector(
     state => state.dataReducer.data.content,
   )?.filter(({ id }) => id === Number(ContentId))[0];
-  useEffect(() => {
-    console.log(filterData);
-  }, [filterData]);
 
   return (
     <YoutubeContainer>
