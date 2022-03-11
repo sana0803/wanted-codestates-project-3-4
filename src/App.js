@@ -7,6 +7,13 @@ import { useDispatch } from 'react-redux';
 import { getContentData } from './redux/actions';
 
 const App = () => {
+  // const dispatch = useDispatch();
+  // const click = () => {
+  //   dispatch(clickLike(71));
+  //   console.log(data);
+  // };
+  // console.log(data);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getContentData());
