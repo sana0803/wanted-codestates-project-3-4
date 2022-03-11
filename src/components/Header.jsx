@@ -16,6 +16,7 @@ const Header = contentSector => {
   const barRef = useRef(null);
   // 나중에 redux에서 받아올거
   const [currentIdx, setCurrentIdx] = useState(0);
+
   // const currentIdx = useState(state => )
 
   const moveBar = id => {
@@ -25,7 +26,7 @@ const Header = contentSector => {
   return (
     <HeaderWrap>
       <img src={logo} />
-      <TabContainer>
+      <TabContainer onClick={() => setCurrentIdx()}>
         {tabMenu.map((item, idx) => (
           <li
             className={currentIdx === idx ? 'active' : ''}
