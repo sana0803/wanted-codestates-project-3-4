@@ -14,7 +14,6 @@ const Header = () => {
   const navigate = useNavigate();
   const barRef = useRef(null);
   const { type } = useParams();
-  console.log(type);
 
   const [currentIdx, setCurrentIdx] = useState(
     tabMenu.filter(({ content }) => {

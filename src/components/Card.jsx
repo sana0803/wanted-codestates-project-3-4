@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { BsUpload } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
-
 import styled from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
+import { clickLike } from '../redux/actions';
 
 const CardContent = styled.li`
   padding: 10px 10px 20px 10px;
@@ -32,12 +33,11 @@ const CardContent = styled.li`
   }
 `;
 
-const Card = ({ liked, setLiked, index, item, type, link, id }) => {
-  const handleLiked = () => {
-    setLiked(!liked);
-  };
-
+const Card = ({ item, type, link, id }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const likeData = useSelector(state => state.dataReducer.data.content);
+  const likeDataArr = likeData.filter(value => value.id === id);
 
   const clickCardContent = () => {
     if (type === 'news') {
@@ -47,9 +47,13 @@ const Card = ({ liked, setLiked, index, item, type, link, id }) => {
     }
   };
 
+  const isLiked = () => {
+    dispatch(clickLike(id));
+  };
+
   return (
     <>
-      <CardContent key={index}>
+      <CardContent>
         <img
           src={item.image === '' ? '../image/none.png' : item.image}
           alt={item.title}
@@ -57,13 +61,16 @@ const Card = ({ liked, setLiked, index, item, type, link, id }) => {
         />
         <p>
           {item.upload_date}
-          <span onClick={handleLiked}>
-            {liked ? (
-              <AiFillHeart color="red" size={18} />
-            ) : (
-              <AiOutlineHeart size={18} />
-            )}
-            7
+          <span>
+            <span onClick={isLiked}>
+              {likeDataArr[0].isClick ? (
+                <AiFillHeart color="red" size={18} />
+              ) : (
+                <AiOutlineHeart size={18} />
+              )}
+              {likeDataArr[0].like_cnt}
+            </span>
+
             <a
               href={
                 type === 'youtube'
