@@ -1,6 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import logo from '../../src/logo.svg';
 // import { useSelector } from 'react-redux';
 
@@ -11,17 +11,29 @@ const tabMenu = [
 ];
 
 const Header = () => {
-  // console.log(contentSector);
+  const location = useLocation();
+  const pathname = location.pathname.split('/');
+  const matchedName = pathname[pathname.length - 1];
   const navigate = useNavigate();
   const barRef = useRef(null);
-  // 나중에 redux에서 받아올거
   const [currentIdx, setCurrentIdx] = useState(0);
-
-  // const currentIdx = useState(state => )
 
   const moveBar = id => {
     barRef.current.style.transform = `translateX(${id}00%)`;
   };
+
+  const onCheckHandler = () => {
+    tabMenu.forEach((item, index) => {
+      if (matchedName === item.content) {
+        moveBar(index);
+        setCurrentIdx(index);
+      }
+    });
+  };
+
+  useEffect(() => {
+    onCheckHandler();
+  }, []);
 
   return (
     <HeaderWrap>
@@ -90,7 +102,6 @@ const TabContainer = styled.ul`
     cursor: pointer;
     color: var(--gray);
     font-weight: 600;
-
     :hover {
       background-color: var(--light-gray);
     }

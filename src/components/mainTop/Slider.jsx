@@ -13,12 +13,12 @@ function Slider() {
   const state = useSelector(state => state.dataReducer.data.content);
   const { type } = useParams();
   const dispatch = useDispatch();
+
   const nextSlide = () => {
     slideRef.current.style.transition = 'all 0.3s ease-in-out';
     const percent = (720 * 3) / TotalSlides;
     if (currentSlide >= TotalSlides - 1) {
       setCurrentSlide(0);
-
       slideRef.current.style.transform = `translateX(${0}%)`;
     } else {
       setCurrentSlide(currentSlide + 1);
@@ -34,7 +34,7 @@ function Slider() {
     dispatch(getContentData());
     setTimeout(nextSlide, 5000);
     clearTimeout();
-  }, [currentSlide]);
+  }, []);
   // console.log(state);
   let filteredData = [];
   if (state) {
