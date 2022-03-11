@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import data from './data.json';
-import { useParams, useNavigate } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 import Card from './Card';
 import AddButton from './AddButton';
+import PropTypes from 'prop-types';
+import BannerMessage from './BannerMessage';
 
-const ContentList = () => {
-  const { type } = useParams();
-  const navigate = useNavigate();
+const ContentList = ({ type }) => {
+  // const { type } = useParams();
 
   const [matchData, setMatchData] = useState([]);
   const [addData, setAddData] = useState(false);
@@ -27,9 +28,7 @@ const ContentList = () => {
 
   return (
     <>
-      <button onClick={() => navigate('/youtube')}>유튜브</button>
-      <button onClick={() => navigate('/news')}>뉴스</button>
-      <button onClick={() => navigate('/report')}>인사이트</button>
+      <BannerMessage text="예시" />
       <ul>
         {matchData.map((item, index) => {
           if (addData ? index : index < 4) {
@@ -42,6 +41,10 @@ const ContentList = () => {
       </ul>
     </>
   );
+};
+
+ContentList.propTypes = {
+  type: PropTypes.string,
 };
 
 export default ContentList;
