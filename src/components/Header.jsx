@@ -14,12 +14,13 @@ const Header = () => {
   const navigate = useNavigate();
   // 나중에 redux에서 받아올거
   const [currentIdx, setCurrentIdx] = useState(0);
+
   // const currentIdx = useState(state => )
 
   return (
     <HeaderWrap>
       <img src={logo} />
-      <TabContainer>
+      <TabContainer onClick={() => setCurrentIdx()}>
         {tabMenu.map((item, idx) => (
           // currentIdx={currentIdx}
           <li

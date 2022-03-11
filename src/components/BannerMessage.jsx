@@ -34,7 +34,7 @@ const BannerMessage = ({ text }) => {
   return (
     <div>
       <BannerContainer>
-        <div>{text}</div>{' '}
+        <div>{text}</div>
         <Banner2 type={type} text={text}>
           {text === '새로 올라왔어요' ? 'new' : type}
         </Banner2>
