@@ -4,31 +4,40 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Button = styled.button`
-  width: 90%;
+  width: 680px;
+  height: 48px;
   display: block;
   margin: 0 auto;
   background-color: #bfe0ff;
   color: #3081cc;
+  font-weight: bold;
+  font-size: 16px;
   border: 0;
-  padding: 8px 0;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
+  margin-bottom: 30px;
+
+  &:hover {
+    transition: all 0.2s ease-in;
+    background-color: var(--main-color);
+    color: #fff;
+  }
 `;
 
-const AddButton = ({ addData, setAddData }) => {
+const AddButton = ({ isAdd, setIsAdd }) => {
   const handleAddContent = () => {
-    setAddData(!addData);
+    setIsAdd(!isAdd);
   };
   return (
     <>
-      <Button onClick={handleAddContent}>{addData ? '접기' : '더보기'}</Button>
+      <Button onClick={handleAddContent}>{isAdd ? '접기' : '더보기'}</Button>
     </>
   );
 };
 
 AddButton.propTypes = {
-  setAddData: PropTypes.func,
-  addData: PropTypes.bool,
+  setIsAdd: PropTypes.func,
+  isAdd: PropTypes.bool,
 };
 
 export default AddButton;

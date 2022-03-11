@@ -1,27 +1,38 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import logo from '../../src/logo.svg';
-// import { useSelector } from 'react-redux';
 
 const tabMenu = [
-  { sector: '알쓸B잡', content: 'news' },
-  { sector: '유튜브', content: 'youtube' },
-  { sector: '인사이트', content: 'report' },
+  { id: 0, sector: '알쓸B잡', content: 'news' },
+  { id: 1, sector: '유튜브', content: 'youtube' },
+  { id: 2, sector: '인사이트', content: 'report' },
 ];
 
 const Header = () => {
-  // console.log(contentSector);
+  const location = useLocation();
+  const pathname = location.pathname.split('/');
+  const matchedName = pathname[pathname.length - 1];
   const navigate = useNavigate();
   const barRef = useRef(null);
-  // 나중에 redux에서 받아올거
   const [currentIdx, setCurrentIdx] = useState(0);
-
-  // const currentIdx = useState(state => )
 
   const moveBar = id => {
     barRef.current.style.transform = `translateX(${id}00%)`;
   };
+
+  const onCheckHandler = () => {
+    tabMenu.forEach((item, index) => {
+      if (matchedName === item.content) {
+        moveBar(index);
+        setCurrentIdx(index);
+      }
+    });
+  };
+
+  useEffect(() => {
+    onCheckHandler();
+  }, []);
 
   return (
     <HeaderWrap>
@@ -40,7 +51,7 @@ const Header = () => {
             {item.sector}
           </li>
         ))}
-        <BottomBar ref={barRef} />
+        <BottomBar currentIdx={currentIdx} ref={barRef} />
       </TabContainer>
       <SubscribeWrap>
         <span>샌드뱅크 오리지널</span>
@@ -90,7 +101,6 @@ const TabContainer = styled.ul`
     cursor: pointer;
     color: var(--gray);
     font-weight: 600;
-
     :hover {
       background-color: var(--light-gray);
     }
@@ -108,7 +118,7 @@ const BottomBar = styled.div`
   bottom: 0px;
   background-color: var(--main-color);
   transition: all 0.3s ease-in-out;
-  transform: translateX(0rem);
+  transform: translateX(${props => props.currentIdx * '100%'});
 `;
 
 const SubscribeWrap = styled.div`

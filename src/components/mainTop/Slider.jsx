@@ -4,8 +4,10 @@ import Slide from './Slide';
 import BannerMessage from '../BannerMessage';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-const TotalSlides = 3;
-function Slider() {
+
+const Slider = () => {
+  const TotalSlides = 3;
+
   const [currentSlide, setCurrentSlide] = useState(0);
   const slideRef = useRef();
   const state = useSelector(state => state.dataReducer.data.content);
@@ -15,7 +17,6 @@ function Slider() {
     const percent = (720 * 3) / TotalSlides;
     if (currentSlide >= TotalSlides - 1) {
       setCurrentSlide(0);
-
       slideRef.current.style.transform = `translateX(${0}%)`;
     } else {
       setCurrentSlide(currentSlide + 1);
@@ -26,13 +27,9 @@ function Slider() {
   };
 
   useEffect(() => {
-    // slideRef.current.style.transition = 'all 0.3s ease-in-out';
-    // setInterval(nextSlide, 2000);
-
     setTimeout(nextSlide, 5000);
     clearTimeout();
-  }, [currentSlide]);
-  // console.log(state);
+  }, []);
   let filteredData = [];
   if (state) {
     filteredData = state.filter(obj => obj.like_top === 1);
@@ -46,9 +43,6 @@ function Slider() {
       filteredData = filteredData.filter(obj => obj.sector_id === 3);
     }
   }
-  // console.log(type);
-  // console.log(filteredData);
-  // setTimeout(nextSlide, 2000);
   return (
     <div>
       <Container>
@@ -69,7 +63,7 @@ function Slider() {
       </Container>
     </div>
   );
-}
+};
 
 const Container = styled.div`
   width: 720px;

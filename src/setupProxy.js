@@ -1,9 +1,10 @@
 const { createProxyMiddleware } = require('http-proxy-middleware');
+const apiUrl = process.env.REACT_APP_SEARCH_API;
 
 module.exports = function (app) {
   app.use(
     createProxyMiddleware('/api', {
-      target: 'https://test.daground.io/',
+      target: `${apiUrl}`,
       changeOrigin: true,
       pathRewrite: {
         '^/api': '',
