@@ -5,9 +5,9 @@ import logo from '../../src/logo.svg';
 // import { useSelector } from 'react-redux';
 
 const tabMenu = [
-  { sector: '알쓸B잡', content: '' },
-  { sector: '유튜브', content: '' },
-  { sector: '인사이트', content: '' },
+  { sector: '알쓸B잡', content: 'news' },
+  { sector: '유튜브', content: 'youtube' },
+  { sector: '인사이트', content: 'report' },
 ];
 
 const Header = () => {
@@ -26,14 +26,19 @@ const Header = () => {
             className={currentIdx === idx ? 'active' : ''}
             key={idx}
             currentIdx={currentIdx}
-            onClick={() => navigate('/:type')}
+            onClick={() => navigate(`/${item.content}`)}
           >
             {item.sector}
           </li>
         ))}
         <BottomBar />
       </TabContainer>
-      <SubscribeBtn>구독하기</SubscribeBtn>
+      <SubscribeWrap>
+        <span>샌드뱅크 오리지널</span>
+        <SubscribeBtn>
+          <span>구독하기</span>
+        </SubscribeBtn>
+      </SubscribeWrap>
     </HeaderWrap>
   );
 };
@@ -43,13 +48,20 @@ const HeaderWrap = styled.header`
   width: 100vw;
   background-color: #fff;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  margin-bottom: 60px;
+  img {
+    width: 10rem;
+    cursor: pointer;
+    /* background-color: yellow; */
+  }
 `;
 
 const TabContainer = styled.ul`
   max-width: 720px;
   height: 100%;
-  /* background-color: green; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -57,8 +69,7 @@ const TabContainer = styled.ul`
   position: relative;
 
   li {
-    transition: all 0.3s ease-in-out;
-    /* background-color: var(--light-gray); */
+    transition: all 0.2s ease-in-out;
     width: 8rem;
     height: 100%;
     line-height: 60px;
@@ -85,13 +96,37 @@ const BottomBar = styled.div`
   bottom: 0px;
   background-color: var(--main-color);
   transition: all 0.3s ease-in-out;
-  transform: translateX(8rem);
+  transform: translateX(0rem);
+`;
+
+const SubscribeWrap = styled.div`
+  color: var(--blue);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+
+  & > span {
+    margin-right: 10px;
+  }
 `;
 
 const SubscribeBtn = styled.div`
-  width: 7rem;
+  width: 5.5rem;
   height: 32px;
   background-color: var(--blue);
+  border-radius: 10px;
+  color: #fff;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  &:hover {
+    transition: all 0.3s ease-in-out;
+    background-color: var(--main-color);
+  }
 `;
 
 export default Header;
