@@ -26,7 +26,6 @@ export const getContentData = async () => {
       type: GET_ERROR,
       payload: {
         isLoaded: false,
-        data: [],
       },
     };
   }
