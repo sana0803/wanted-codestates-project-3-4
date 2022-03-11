@@ -12,6 +12,7 @@ const CardContent = styled.li`
   img {
     width: 100%;
     height: 200px;
+    cursor: pointer;
   }
   p {
     color: #9fa0a6;
@@ -48,10 +49,11 @@ const Card = ({ liked, setLiked, index, item, type, link, id }) => {
 
   return (
     <>
-      <CardContent key={index} onClick={clickCardContent}>
+      <CardContent key={index}>
         <img
           src={item.image === '' ? '../image/none.png' : item.image}
           alt={item.title}
+          onClick={clickCardContent}
         />
         <p>
           {item.upload_date}
