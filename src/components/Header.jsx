@@ -64,6 +64,7 @@ const HeaderWrap = styled.header`
   position: fixed;
   z-index: 10;
   border-bottom: 1px solid #ddd;
+  box-sizing: border-box;
   img {
     width: 10rem;
     cursor: pointer;
