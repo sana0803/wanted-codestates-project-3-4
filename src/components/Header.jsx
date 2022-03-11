@@ -26,7 +26,7 @@ const Header = () => {
   return (
     <HeaderWrap>
       <img src={logo} />
-      <TabContainer onClick={() => setCurrentIdx()}>
+      <TabContainer>
         {tabMenu.map((item, idx) => (
           <li
             className={currentIdx === idx ? 'active' : ''}
