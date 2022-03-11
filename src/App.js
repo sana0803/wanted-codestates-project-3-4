@@ -10,8 +10,12 @@ const App = () => {
   // useEffect(() => {
   //   dispatch(getContentData());
   // }, []);
+
+  // const click = () => {
+  //   dispatch(clickLike(71));
+  //   console.log(data);
+  // };
   // console.log(data);
-  // console.log(contentData, contentSector);
 
   return (
     <BrowserRouter>

@@ -2,17 +2,42 @@ import { CLICK_LIKE, GET_CONTENT_DATA, GET_ERROR } from '../actions';
 
 const initialState = { data: [], isLoaded: false };
 export const dataReducer = (state = initialState, action) => {
-  switch (action?.type) {
+  switch (action.type) {
     case CLICK_LIKE: {
-      return state;
+      const content = state.data.content.map(item => {
+        if (item.id === action.id) {
+          if (item.onClick === false) {
+            return {
+              ...item,
+              like_cnt: item.like_cnt + 1,
+              onClick: true,
+            };
+          } else {
+            return { ...item, like_cnt: item.like_cnt - 1, onClick: false };
+          }
+        } else {
+          return item;
+        }
+      });
+      return { ...state, data: { content: content } };
     }
+
     case GET_CONTENT_DATA: {
+      const content = action.payload.data.content.map(item => {
+        item.onClick = false;
+        return item;
+      });
+      const sector = action.payload.data.sector;
       return {
         ...state,
-        data: action.payload.data,
+        data: {
+          content: content,
+          sector: sector,
+        },
         isLoaded: action.payload.isLoaded,
       };
     }
+
     case GET_ERROR: {
       return {
         ...state,
