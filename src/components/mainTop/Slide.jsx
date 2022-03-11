@@ -10,11 +10,9 @@ import { useDispatch } from 'react-redux';
 import { clickLike } from '../../redux/actions';
 
 const Slide = ({ img, title, id, type }) => {
-  // console.log(img);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const state = useSelector(state => state);
-  // console.log(state);
 
   let data = [];
 
@@ -44,7 +42,6 @@ const Slide = ({ img, title, id, type }) => {
               <FiHeart
                 size="32"
                 onClick={() => {
-                  console.log(data[0]);
                   dispatch(clickLike(id));
                 }}
               />
