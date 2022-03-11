@@ -8,7 +8,7 @@ const ContentList = () => {
   const { type } = useParams();
   const navigate = useNavigate();
 
-  const [matchData, setMatchData] = useState();
+  const [matchData, setMatchData] = useState([]);
   const [addData, setAddData] = useState(false);
 
   const dataList = data.content;

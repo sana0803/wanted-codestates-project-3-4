@@ -19,15 +19,13 @@ const App = () => {
     };
     fetchData();
   }, []);
-
-  console.log(contentData, contentSector);
+  // console.log(contentData, contentSector);
 
   return (
     <BrowserRouter>
-      <Header />
-      <Main />
+      <Header contentSector={contentSector} />
       <Routes>
-        <Route path="/" element={<Navigate replace to="/youtube" />} />
+        <Route path="/" element={<Navigate replace to="/news" />} />
         <Route path="/:type" element={<Main />} />
         <Route path="/:type/:id" element={<Detail />} />
       </Routes>
