@@ -1,11 +1,12 @@
 import React from 'react';
 import BannerMessage from '../BannerMessage';
-
+import Slider from './Slider';
 const MainTop = () => {
   return (
     <div>
       {/* BannerMessage component 사용예시 */}
-      <BannerMessage text="여기에 적으면 내용이 나옵니다" />
+      <BannerMessage text="새로 올라왔어요" />
+      <Slider />
     </div>
   );
 };
