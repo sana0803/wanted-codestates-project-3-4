@@ -57,14 +57,25 @@ const ReportBtnContainer = styled.div`
 const ReportHref = styled.a`
   width: 680px;
   height: 48px;
+  display: block;
+  margin: 0 auto;
   background-color: #bfe0ff;
   color: #3081cc;
-  border-radius: 3px;
-  text-align: center;
-  font-size: 16px;
   font-weight: bold;
+  font-size: 16px;
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-bottom: 30px;
   line-height: 48px;
   text-decoration: none;
+  text-align: center;
+
+  &:hover {
+    transition: all 0.2s ease-in;
+    background-color: var(--main-color);
+    color: #fff;
+  }
 `;
 
 export default Report;

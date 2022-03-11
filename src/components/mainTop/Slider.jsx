@@ -6,13 +6,16 @@ import { getContentData } from '../../redux/actions';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
+
 const TotalSlides = 3;
+
 function Slider() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slideRef = useRef();
   const state = useSelector(state => state.dataReducer.data.content);
   const { type } = useParams();
   const dispatch = useDispatch();
+
   const nextSlide = () => {
     slideRef.current.style.transition = 'all 0.3s ease-in-out';
     const percent = (720 * 3) / TotalSlides;
