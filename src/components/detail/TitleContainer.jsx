@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { BsUpload } from 'react-icons/bs';
 import { FiHeart } from 'react-icons/fi';
@@ -9,18 +9,16 @@ import { clickLike } from '../../redux/actions';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
-const TitleContainer = ({ id, title, link }) => {
-  const { type } = useParams();
+const TitleContainer = ({ title, link }) => {
+  const { id, type } = useParams();
   const dispatch = useDispatch();
-  const [heart, setHeart] = useState(false);
-
-  const like = useSelector(state => state);
-
-  console.log(like);
+  const newId = Number(id);
+  const contentObj = useSelector(
+    state => state.dataReducer.data.content,
+  )?.filter(({ id }) => id === newId)[0];
 
   const clickHeartBtn = () => {
-    dispatch(clickLike(id));
-    setHeart(like[id]);
+    dispatch(clickLike(newId));
   };
 
   return (
@@ -28,7 +26,11 @@ const TitleContainer = ({ id, title, link }) => {
       <Title>{title}</Title>
       <ButtonContainer>
         <IconBtn onClick={clickHeartBtn}>
-          {heart ? <FaHeart size="32" color="red" /> : <FiHeart size="32" />}
+          {contentObj?.isClick ? (
+            <FaHeart size="32" color="red" />
+          ) : (
+            <FiHeart size="32" />
+          )}
         </IconBtn>
         <IconHref
           href={
@@ -77,7 +79,6 @@ const IconHref = styled.a`
 `;
 
 TitleContainer.propTypes = {
-  id: PropTypes.number,
   title: PropTypes.string,
   link: PropTypes.string,
 };
