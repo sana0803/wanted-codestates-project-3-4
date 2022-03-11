@@ -40,7 +40,7 @@ const Slide = ({ img, title, id, type }) => {
         <MainContainer>
           <Title>{title}</Title>
           <ButtonContainer>
-            <IconBtn clicked={+data[0]?.onClick}>
+            <IconBtn clicked={+data[0]?.isClick}>
               <FiHeart
                 size="32"
                 onClick={() => {
