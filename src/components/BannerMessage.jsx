@@ -32,11 +32,10 @@ const Banner2 = styled.span`
 const BannerMessage = ({ text }) => {
   const { type } = useParams();
   // let capitalizedType = type[0].toUpperCase() + type.slice(1);
-  // console.log(capitalizedType);
   return (
     <div>
       <BannerContainer>
-        {/* <div>{text}</div> <Banner2 type={type}>{capitalizedType}</Banner2> */}
+        <div>{text}</div> <Banner2 type={type}>{type}</Banner2>
       </BannerContainer>
     </div>
   );
