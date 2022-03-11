@@ -16,6 +16,8 @@ const TitleContainer = ({ id, title, link }) => {
 
   const like = useSelector(state => state);
 
+  console.log(like);
+
   const clickHeartBtn = () => {
     dispatch(clickLike(id));
     setHeart(like[id]);
@@ -57,6 +59,7 @@ const ButtonContainer = styled.div`
 const Title = styled.div`
   font-weight: bold;
   font-size: 18px;
+  width: 590px;
 `;
 
 const IconBtn = styled.button`
