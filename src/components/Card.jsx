@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { BsUpload } from 'react-icons/bs';
+import { useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
 
@@ -30,15 +31,24 @@ const CardContent = styled.li`
   }
 `;
 
-const Card = ({ liked, setLiked, index, item }) => {
+const Card = ({ liked, setLiked, index, item, type, link, id }) => {
   const handleLiked = () => {
     setLiked(!liked);
   };
 
-  // const [href, setHref] = useState();
+  const navigate = useNavigate();
+
+  const clickCardContent = () => {
+    if (type === 'news') {
+      window.open([link], '_blank');
+    } else {
+      navigate(`/${type}/${id}`);
+    }
+  };
+
   return (
     <>
-      <CardContent key={index}>
+      <CardContent key={index} onClick={clickCardContent}>
         <img
           src={item.image === '' ? '../image/none.png' : item.image}
           alt={item.title}
@@ -53,7 +63,11 @@ const Card = ({ liked, setLiked, index, item }) => {
             )}
             7
             <a
-              href={`https://www.youtube.com/watch?v=${item.link}`}
+              href={
+                type === 'youtube'
+                  ? 'https://www.youtube.com/watch?v=' + link
+                  : link
+              }
               rel="noreferrer"
               target="_blank"
             >
@@ -71,6 +85,9 @@ Card.propTypes = {
   setLiked: PropTypes.func,
   index: PropTypes.number,
   item: PropTypes.object,
+  type: PropTypes.string,
+  link: PropTypes.string,
+  id: PropTypes.number,
 };
 
 export default Card;
