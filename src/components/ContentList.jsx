@@ -11,6 +11,7 @@ const ContentList = ({ type }) => {
 
   const [matchData, setMatchData] = useState([]);
   const [addData, setAddData] = useState(false);
+  const [liked, setLiked] = useState();
 
   const dataList = data.content;
   const filterData = id => dataList.filter(value => value.sector_id === id);
@@ -33,7 +34,13 @@ const ContentList = ({ type }) => {
         {matchData.map((item, index) => {
           if (addData ? index : index < 4) {
             return (
-              <Card key={index} index={index} item={item} addData={addData} />
+              <Card
+                key={index}
+                index={index}
+                item={item}
+                liked={liked}
+                setLiked={setLiked}
+              />
             );
           }
         })}

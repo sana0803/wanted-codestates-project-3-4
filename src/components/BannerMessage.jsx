@@ -34,7 +34,7 @@ const Banner2 = styled.span`
   background-color: ${props =>
     props.type === 'news' ? '#659DF9' : null}; // news일 때 색깔
   background-color: ${props =>
-    props.type === 'report' ? '#B72CA0' : null}; // Report일 때 색깔
+    props.type === 'report' ? '#7F73B0' : null}; // Report일 때 색깔
   background-color: ${props =>
     props.text === '새로 올라왔어요' ? '#1276f0' : null};
   color: white;
