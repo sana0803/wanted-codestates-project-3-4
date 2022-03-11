@@ -1,15 +1,20 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
-// import Slide from './Slide';
+import Slide from './Slide';
 import BannerMessage from '../BannerMessage';
-import Youtube from './Youtube';
-
+import { getContentData } from '../../redux/actions';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 const TotalSlides = 3;
 function Slider() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slideRef = useRef();
-
+  const state = useSelector(state => state.dataReducer.data.content);
+  const { type } = useParams();
+  const dispatch = useDispatch();
   const nextSlide = () => {
+    slideRef.current.style.transition = 'all 0.3s ease-in-out';
     const percent = (720 * 3) / TotalSlides;
     if (currentSlide >= TotalSlides - 1) {
       setCurrentSlide(0);
@@ -21,44 +26,41 @@ function Slider() {
         (currentSlide + 1) * percent
       }px)`;
     }
-    // console.log('currentSlide : ', currentSlide);
-    // console.log(slideRef.current.style.transform);
   };
 
   useEffect(() => {
-    slideRef.current.style.transition = 'all 0.3s ease-in-out';
+    // slideRef.current.style.transition = 'all 0.3s ease-in-out';
     // setInterval(nextSlide, 2000);
-    setTimeout(nextSlide, 2000);
+    dispatch(getContentData());
+    setTimeout(nextSlide, 5000);
+    clearTimeout();
   }, [currentSlide]);
-
+  // console.log(state);
+  let filteredData = [];
+  if (state) {
+    filteredData = state.filter(obj => obj.like_top === 1);
+    if (type === 'youtube') {
+      filteredData = filteredData.filter(obj => obj.sector_id === 2);
+    }
+    if (type === 'news') {
+      filteredData = filteredData.filter(obj => obj.sector_id === 1);
+    }
+    if (type === 'report') {
+      filteredData = filteredData.filter(obj => obj.sector_id === 3);
+    }
+  }
+  // console.log(type);
+  // console.log(filteredData);
+  // setTimeout(nextSlide, 2000);
   return (
     <div>
       <Container>
         <BannerMessage text="새로 올라왔어요" />
         <SliderConatiner ref={slideRef}>
-          <div>
-            <img
-              width="720px"
-              height="360px"
-              src="https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2076&q=80"
-            />
-          </div>
-          <div>
-            <img
-              width="720px"
-              height="360px"
-              src="https://images.unsplash.com/photo-1542157565-4607d82cf417?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80"
-            />
-          </div>
-          <div>
-            <img
-              width="720px"
-              height="360px"
-              src="https://images.unsplash.com/photo-1512036594830-51cea3a8df78?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=718&q=80"
-            />
-          </div>
+          {filteredData.map((obj, index) => {
+            return <Slide key={index} img={obj.image} title={obj.title} />;
+          })}
         </SliderConatiner>
-        <Youtube />
       </Container>
     </div>
   );
