@@ -25,7 +25,6 @@ const App = () => {
   return (
     <BrowserRouter>
       <Header />
-      <Main />
       <Routes>
         <Route path="/" element={<Navigate replace to="/youtube" />} />
         <Route path="/:type" element={<Main />} />
