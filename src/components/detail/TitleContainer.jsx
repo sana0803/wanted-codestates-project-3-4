@@ -16,6 +16,8 @@ const TitleContainer = ({ id, title, link }) => {
 
   const like = useSelector(state => state);
 
+  console.log(like);
+
   const clickHeartBtn = () => {
     dispatch(clickLike(id));
     setHeart(like[id]);
