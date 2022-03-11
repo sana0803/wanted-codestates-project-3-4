@@ -2,18 +2,16 @@ import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import Slide from './Slide';
 import BannerMessage from '../BannerMessage';
-import { getContentData } from '../../redux/actions';
 import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-const TotalSlides = 3;
-function Slider() {
+
+const Slider = () => {
+  const TotalSlides = 3;
+
   const [currentSlide, setCurrentSlide] = useState(0);
   const slideRef = useRef();
   const state = useSelector(state => state.dataReducer.data.content);
   const { type } = useParams();
-  const dispatch = useDispatch();
-
   const nextSlide = () => {
     slideRef.current.style.transition = 'all 0.3s ease-in-out';
     const percent = (720 * 3) / TotalSlides;
@@ -29,13 +27,9 @@ function Slider() {
   };
 
   useEffect(() => {
-    // slideRef.current.style.transition = 'all 0.3s ease-in-out';
-    // setInterval(nextSlide, 2000);
-    dispatch(getContentData());
     setTimeout(nextSlide, 5000);
     clearTimeout();
   }, []);
-  // console.log(state);
   let filteredData = [];
   if (state) {
     filteredData = state.filter(obj => obj.like_top === 1);
@@ -49,22 +43,27 @@ function Slider() {
       filteredData = filteredData.filter(obj => obj.sector_id === 3);
     }
   }
-  // console.log(type);
-  // console.log(filteredData);
-  // setTimeout(nextSlide, 2000);
   return (
     <div>
       <Container>
         <BannerMessage text="새로 올라왔어요" />
         <SliderConatiner ref={slideRef}>
           {filteredData.map((obj, index) => {
-            return <Slide key={index} img={obj.image} title={obj.title} />;
+            return (
+              <Slide
+                key={index}
+                img={obj.image}
+                title={obj.title}
+                id={obj.id}
+                type={type}
+              />
+            );
           })}
         </SliderConatiner>
       </Container>
     </div>
   );
-}
+};
 
 const Container = styled.div`
   width: 720px;

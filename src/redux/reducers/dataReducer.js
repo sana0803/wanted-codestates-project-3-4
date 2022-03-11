@@ -6,14 +6,14 @@ export const dataReducer = (state = initialState, action) => {
     case CLICK_LIKE: {
       const content = state.data.content.map(item => {
         if (item.id === action.id) {
-          if (item.onClick === false) {
+          if (item.isClick === false) {
             return {
               ...item,
               like_cnt: item.like_cnt + 1,
-              onClick: true,
+              isClick: true,
             };
           } else {
-            return { ...item, like_cnt: item.like_cnt - 1, onClick: false };
+            return { ...item, like_cnt: item.like_cnt - 1, isClick: false };
           }
         } else {
           return item;
@@ -24,7 +24,7 @@ export const dataReducer = (state = initialState, action) => {
 
     case GET_CONTENT_DATA: {
       const content = action.payload.data.content.map(item => {
-        item.onClick = false;
+        item.isClick = false;
         return item;
       });
       const sector = action.payload.data.sector;

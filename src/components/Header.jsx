@@ -2,12 +2,11 @@ import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate, useLocation } from 'react-router-dom';
 import logo from '../../src/logo.svg';
-// import { useSelector } from 'react-redux';
 
 const tabMenu = [
-  { sector: '알쓸B잡', content: 'news' },
-  { sector: '유튜브', content: 'youtube' },
-  { sector: '인사이트', content: 'report' },
+  { id: 0, sector: '알쓸B잡', content: 'news' },
+  { id: 1, sector: '유튜브', content: 'youtube' },
+  { id: 2, sector: '인사이트', content: 'report' },
 ];
 
 const Header = () => {
@@ -52,7 +51,7 @@ const Header = () => {
             {item.sector}
           </li>
         ))}
-        <BottomBar ref={barRef} />
+        <BottomBar currentIdx={currentIdx} ref={barRef} />
       </TabContainer>
       <SubscribeWrap>
         <span>샌드뱅크 오리지널</span>
@@ -119,7 +118,7 @@ const BottomBar = styled.div`
   bottom: 0px;
   background-color: var(--main-color);
   transition: all 0.3s ease-in-out;
-  transform: translateX(0rem);
+  transform: translateX(${props => props.currentIdx * '100%'});
 `;
 
 const SubscribeWrap = styled.div`

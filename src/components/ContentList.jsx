@@ -19,9 +19,8 @@ const CardList = styled.section`
 const ContentList = ({ type }) => {
   const dataList = useSelector(state => state.dataReducer.data.content);
   const [matchData, setMatchData] = useState([]);
-  const [addData, setAddData] = useState(false);
+  const [isAdd, setIsAdd] = useState(false);
   const [subheading, setSubheading] = useState('알쓸B잡');
-  const [liked, setLiked] = useState();
 
   const filterData = id => dataList?.filter(value => value.sector_id === id);
 
@@ -36,7 +35,7 @@ const ContentList = ({ type }) => {
       setMatchData(filterData(3));
       setSubheading('어떻게 투자할까');
     }
-    setAddData(false);
+    // setIsAdd(false);
   }, [type, dataList]);
 
   return (
@@ -45,14 +44,11 @@ const ContentList = ({ type }) => {
       <ul>
         {matchData &&
           matchData.map((item, index) => {
-            if (addData ? index + 1 : index < 4) {
+            if (isAdd ? isAdd : index < 4) {
               return (
                 <Card
                   key={index}
-                  index={index}
                   item={item}
-                  liked={liked}
-                  setLiked={setLiked}
                   type={type}
                   link={item.link}
                   id={item.id}
@@ -61,7 +57,7 @@ const ContentList = ({ type }) => {
             }
           })}
       </ul>
-      <AddButton addData={addData} setAddData={setAddData} />
+      <AddButton isAdd={isAdd} setIsAdd={setIsAdd} />
     </CardList>
   );
 };
