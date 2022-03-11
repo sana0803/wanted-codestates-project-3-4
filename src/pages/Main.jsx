@@ -6,6 +6,7 @@ const Main = () => {
   return (
     <div>
       <MainTop />
+
       <ContentList />
     </div>
   );

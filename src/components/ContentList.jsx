@@ -3,12 +3,13 @@ import data from './data.json';
 import { useParams, useNavigate } from 'react-router-dom';
 import Card from './Card';
 import AddButton from './AddButton';
+import BannerMessage from './BannerMessage';
 
 const ContentList = () => {
   const { type } = useParams();
   const navigate = useNavigate();
 
-  const [matchData, setMatchData] = useState();
+  const [matchData, setMatchData] = useState([]);
   const [addData, setAddData] = useState(false);
 
   const dataList = data.content;
@@ -27,6 +28,7 @@ const ContentList = () => {
 
   return (
     <>
+      <BannerMessage text="내용 입력" />
       <button onClick={() => navigate('/youtube')}>유튜브</button>
       <button onClick={() => navigate('/news')}>뉴스</button>
       <button onClick={() => navigate('/report')}>인사이트</button>

@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 // import Slide from './Slide';
+import BannerMessage from '../BannerMessage';
 
 const TotalSlides = 3;
 function Slider() {
@@ -19,8 +20,8 @@ function Slider() {
         (currentSlide + 1) * percent
       }px)`;
     }
-    console.log('currentSlide : ', currentSlide);
-    console.log(slideRef.current.style.transform);
+    // console.log('currentSlide : ', currentSlide);
+    // console.log(slideRef.current.style.transform);
   };
 
   useEffect(() => {
@@ -32,31 +33,30 @@ function Slider() {
   return (
     <div>
       <Container>
+        <BannerMessage text="새로 올라왔어요" />
         <SliderConatiner ref={slideRef}>
           <div>
             <img
               width="720px"
-              height="720px"
+              height="360px"
               src="https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2076&q=80"
             />
           </div>
           <div>
             <img
               width="720px"
-              height="720px"
+              height="360px"
               src="https://images.unsplash.com/photo-1542157565-4607d82cf417?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80"
             />
           </div>
           <div>
             <img
               width="720px"
-              height="720px"
+              height="360px"
               src="https://images.unsplash.com/photo-1512036594830-51cea3a8df78?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=718&q=80"
             />
           </div>
         </SliderConatiner>
-
-        <button onClick={nextSlide}>이동</button>
       </Container>
     </div>
   );
