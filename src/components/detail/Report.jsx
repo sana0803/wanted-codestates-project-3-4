@@ -22,7 +22,11 @@ const Report = () => {
       <ImageContainer>
         <img src={DUMMY_DATA.image} />
       </ImageContainer>
-      <TitleContainer title={DUMMY_DATA.title} link={DUMMY_DATA.link} />
+      <TitleContainer
+        id={DUMMY_DATA.id}
+        title={DUMMY_DATA.title}
+        link={DUMMY_DATA.link}
+      />
       <Body>{DUMMY_DATA.body}</Body>
       <ReportBtnContainer>
         <ReportHref href={DUMMY_DATA.link}>전체 리포트 읽기</ReportHref>
