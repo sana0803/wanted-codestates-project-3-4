@@ -1,23 +1,28 @@
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import logo from '../../src/logo.svg';
 // import { useSelector } from 'react-redux';
 
 const tabMenu = [
-  { sector: '알쓸B잡', content: 'news' },
-  { sector: '유튜브', content: 'youtube' },
-  { sector: '인사이트', content: 'report' },
+  { id: 0, sector: '알쓸B잡', content: 'news' },
+  { id: 1, sector: '유튜브', content: 'youtube' },
+  { id: 2, sector: '인사이트', content: 'report' },
 ];
 
 const Header = () => {
-  // console.log(contentSector);
   const navigate = useNavigate();
   const barRef = useRef(null);
-  // 나중에 redux에서 받아올거
-  const [currentIdx, setCurrentIdx] = useState(0);
+  const { type } = useParams();
+  console.log(type);
 
-  // const currentIdx = useState(state => )
+  const [currentIdx, setCurrentIdx] = useState(
+    tabMenu.filter(({ content }) => {
+      // console.log(content, type);
+      return content === type;
+    })[0].id,
+  );
+  console.log(currentIdx);
 
   const moveBar = id => {
     barRef.current.style.transform = `translateX(${id}00%)`;
@@ -40,7 +45,7 @@ const Header = () => {
             {item.sector}
           </li>
         ))}
-        <BottomBar ref={barRef} />
+        <BottomBar currentIdx={currentIdx} ref={barRef} />
       </TabContainer>
       <SubscribeWrap>
         <span>샌드뱅크 오리지널</span>
@@ -108,7 +113,7 @@ const BottomBar = styled.div`
   bottom: 0px;
   background-color: var(--main-color);
   transition: all 0.3s ease-in-out;
-  transform: translateX(0rem);
+  transform: translateX(${props => props.currentIdx * '100%'});
 `;
 
 const SubscribeWrap = styled.div`
