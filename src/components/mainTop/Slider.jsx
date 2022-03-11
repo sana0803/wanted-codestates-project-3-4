@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 // import Slide from './Slide';
-// import BannerMessage from '../BannerMessage';
+import BannerMessage from '../BannerMessage';
+import Youtube from './Youtube';
 
 const TotalSlides = 3;
 function Slider() {
@@ -33,7 +34,7 @@ function Slider() {
   return (
     <div>
       <Container>
-        {/* <BannerMessage text="새로 올라왔어요" /> */}
+        <BannerMessage text="새로 올라왔어요" />
         <SliderConatiner ref={slideRef}>
           <div>
             <img
@@ -57,20 +58,23 @@ function Slider() {
             />
           </div>
         </SliderConatiner>
+        <Youtube />
       </Container>
     </div>
   );
 }
 
-const SliderConatiner = styled.div`
-  width: 100%;
-  display: flex;
-`;
-
 const Container = styled.div`
   width: 720px;
   margin: 0 auto;
   overflow: hidden;
+  background-color: white;
+  font-weight: bold;
+`;
+
+const SliderConatiner = styled.div`
+  width: 100%;
+  display: flex;
 `;
 
 export default Slider;
