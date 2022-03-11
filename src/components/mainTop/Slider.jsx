@@ -4,7 +4,9 @@ import Slide from './Slide';
 import BannerMessage from '../BannerMessage';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+
 const TotalSlides = 3;
+
 function Slider() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slideRef = useRef();

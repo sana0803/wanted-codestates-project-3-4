@@ -4,16 +4,16 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Button = styled.button`
-  width: 90%;
-  height: 40px;
+  width: 680px;
+  height: 48px;
   display: block;
   margin: 0 auto;
   background-color: #bfe0ff;
   color: #3081cc;
+  font-weight: bold;
   font-size: 16px;
   border: 0;
-  padding: 8px 0;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
   margin-bottom: 30px;
 
