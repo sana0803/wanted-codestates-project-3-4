@@ -25,6 +25,10 @@ const ContentList = ({ type }) => {
   const filterData = id => dataList?.filter(value => value.sector_id === id);
 
   useEffect(() => {
+    setIsAdd(false);
+  }, [type]);
+
+  useEffect(() => {
     if (type === 'news') {
       setMatchData(filterData(1));
       setSubheading('알쓸B잡');
@@ -35,7 +39,6 @@ const ContentList = ({ type }) => {
       setMatchData(filterData(3));
       setSubheading('어떻게 투자할까');
     }
-    // setIsAdd(false);
   }, [type, dataList]);
 
   return (
