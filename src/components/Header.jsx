@@ -12,7 +12,7 @@ const tabMenu = [
 const Header = () => {
   const location = useLocation();
   const pathname = location.pathname.split('/');
-  const matchedName = pathname[pathname.length - 1];
+  const matchedName = pathname[1];
   const navigate = useNavigate();
   const barRef = useRef(null);
   const [currentIdx, setCurrentIdx] = useState(0);
@@ -36,7 +36,9 @@ const Header = () => {
 
   return (
     <HeaderWrap>
-      <img src={logo} />
+      <a onClick={() => navigate('/')}>
+        <img src={logo} />
+      </a>
       <TabContainer>
         {tabMenu.map((item, idx) => (
           <li
